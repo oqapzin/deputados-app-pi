@@ -93,7 +93,7 @@ Gostaríamos de agradecer ao professor Orion por sua dedicação e apoio ao long
 <table>
   <tr>
     <td align="center">
-      <a href="[https://github.com/oqapzin](https://github.com/orionteles)">
+      <a href="https://github.com/orionteles">
         <img src="https://avatars.githubusercontent.com/u/217235?v=4" alt="Foto do Orion no GitHub"/><br>
         <sub>
           <b>Orion</b>
