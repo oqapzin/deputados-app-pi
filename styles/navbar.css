@@ -1,0 +1,39 @@
+* {
+    font-family: "Montserrat",sans-serif;               
+}
+
+body {
+    background-color: #E0E0E0 !important;
+    padding: 0.75em !important;
+    background-blend-mode: multiply;
+}
+
+.navBar {
+    background: var(--amarelo);
+    height: 12%;
+    border-top: 5px solid var(--azul-escuro);
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.20), 0 2px 10px 0 rgba(0,0,0,0.16);
+}
+
+#textColor, 
+.text{
+    color: var(--azul-escuro);
+    font-weight: bold;
+}
+
+#textColor:hover,
+.text:hover 
+{
+    color: var(--branco-icones);
+    transition: 0.4s;
+}
+
+.imagem {
+    width: 400px;
+    height: 70px;
+}
+
+.icone-busca {
+    margin-top: 5px;
+    margin-right: 2px
+}
