@@ -53,7 +53,7 @@ Este projeto foi desenvolvido em grupo pelos seguintes colaboradores:
   <tr>
     <td align="center">
       <a href="https://github.com/oqapzin">
-        <img src="https://avatars.githubusercontent.com/u/60037529?v=4" width="100px;" alt="Foto do Iuri Silva no GitHub"/><br>
+        <img src="https://avatars.githubusercontent.com/u/60037529?v=4" width="100px;" alt="Logo do Pedro"/><br>
         <sub>
           <b>Pedro</b>
         </sub>
@@ -61,7 +61,7 @@ Este projeto foi desenvolvido em grupo pelos seguintes colaboradores:
     </td>
     <td align="center">
       <a href="https://github.com/Yproshot">
-        <img src="https://avatars.githubusercontent.com/u/107229098?v=4" width="100px;" alt="Foto do Mark Zuckerberg"/><br>
+        <img src="https://avatars.githubusercontent.com/u/107229098?v=4" width="100px;" alt="Foto do Maicon"/><br>
         <sub>
           <b>Maicon</b>
         </sub>
@@ -69,7 +69,7 @@ Este projeto foi desenvolvido em grupo pelos seguintes colaboradores:
     </td>
     <td align="center">
       <a href="https://github.com/kaiosilva17">
-        <img src="https://avatars.githubusercontent.com/u/129460757" width="100px;" alt="Foto do Steve Jobs"/><br>
+        <img src="https://avatars.githubusercontent.com/u/129460757" width="100px;" alt="Foto do Kaio"/><br>
         <sub>
           <b>kaio</b>
         </sub>
@@ -77,7 +77,7 @@ Este projeto foi desenvolvido em grupo pelos seguintes colaboradores:
     </td>
     <td align="center">
       <a href="https://github.com/Arthur2477">
-        <img src="https://avatars.githubusercontent.com/u/106024084?v=4" width="100px;" alt="Foto do Steve Jobs"/><br>
+        <img src="https://avatars.githubusercontent.com/u/106024084?v=4" width="100px;" alt="Foto do Arthur"/><br>
         <sub>
           <b>Arthur</b>
         </sub>
@@ -89,3 +89,16 @@ Este projeto foi desenvolvido em grupo pelos seguintes colaboradores:
 ## 🧑‍🏫 Agradecimentos
 
 Gostaríamos de agradecer ao professor Orion por sua dedicação e apoio ao longo do projeto. Suas ideias e orientações foram fundamentais para o sucesso desta iniciativa.
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="[https://github.com/oqapzin](https://github.com/orionteles)">
+        <img src="https://avatars.githubusercontent.com/u/217235?v=4" alt="Foto do Orion no GitHub"/><br>
+        <sub>
+          <b>Orion</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
