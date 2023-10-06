@@ -45,6 +45,10 @@ npm run dev
 ```  
 6. O projeto será executado localmente e estará disponível no navegador no endereço http://localhost:3000.
 
+## 🖼️ FIGMA
+
+https://www.figma.com/proto/U8YHi3WpqthSii4f9XK1lw/Untitled?type=design&node-id=105-7&t=8lCHNuc4nAREt6Ms-0&scaling=min-zoom&page-id=0%3A1
+
 ## 🤝 Grupo 
 
 Este projeto foi desenvolvido em grupo pelos seguintes colaboradores:
