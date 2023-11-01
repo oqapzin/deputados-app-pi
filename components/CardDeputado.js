@@ -16,7 +16,7 @@ import Col from 'react-bootstrap/Col';
 import React, { useEffect, useState } from 'react'
 import { Box } from '@mui/material';
 
-const CardDeputado = ({ arrayName = [], textCenter = "", rowMd = "", activeFilter = true, isFavoritePage = false, favPageIsNull = null, pageSize = 20 }) => {
+const CardDeputado = ({ arrayName = [], textCenter = "", rowMd = "", activeFilter = true, isFavoritePage = false, favPageIsNull = null, pageSize = 20, resetPageToTop = true }) => {
   const [favDeputados, setFavDeputados] = useState([]);
   const [deputados, setDeputados] = useState([]);
   const [oldDeputados, setOldDeputados] = useState([]);
@@ -80,7 +80,8 @@ const CardDeputado = ({ arrayName = [], textCenter = "", rowMd = "", activeFilte
 
   const onPageChange = (event, page) => {
     setCurrentPage(page);
-    window.scrollTo(0, 0);
+    if(resetPageToTop) window.scrollTo(0, 0);
+   
   };
 
   const paginate = (items, pageNumber, pageSize) => {

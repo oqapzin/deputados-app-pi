@@ -8,6 +8,13 @@ import apiDeputados from "../../services/conectaAPI";
 const listOptions = [
     { title: "Masculino", type: "sex", label: "M", disabled: false },
     { title: "Feminino", type: "sex", label: "F", disabled: false },
+    { title: "Estado", type: "estado", label: "estado", disabled: false },
+    { title: "Partido", type: "partido", label: "partido", disabled: false },
+
+];
+
+
+const StateOptions = [
     { title: "Acre", type: "uf", label: "ac", disabled: false },
     { title: "Alagoas", type: "uf", label: "al", disabled: false },
     { title: "Amapá", type: "uf", label: "ap", disabled: false },
@@ -34,7 +41,7 @@ const listOptions = [
     { title: "São Paulo", type: "uf", label: "sp", disabled: false },
     { title: "Sergipe", type: "uf", label: "se", disabled: false },
     { title: "Tocantins", type: "uf", label: "to", disabled: false },
-];
+]
 
 
 const FilterBy = ({ onAddUser }) => {
@@ -42,6 +49,8 @@ const FilterBy = ({ onAddUser }) => {
     const [filterValue, setFilterValue] = useState([]);
     /*estado para armazenar o retorno da api*/
     const [dataSeached, setDataSeached] = useState([]);
+    const [filterUfAction, setFilterUfAction] = useState(false);
+    const [filterPartidoAction, setFilterPartidoAction] = useState(false);
     /*variavel com texto formatado*/
     let formattedSeach = ""
 
@@ -58,29 +67,47 @@ const FilterBy = ({ onAddUser }) => {
 
     function filter() {
 
-
-        if (listOptions[0]["disabled"] && filterValue.filter(item2 => item2.title == "Masculino")) {
+        console.log(listOptions)
+        if (listOptions[0]["disabled"] && (listOptions[0]["label"] == "M" && filterValue.filter(item => item.title == "Masculino"))) {
             listOptions[0]["disabled"] = false
         }
 
 
-        if (listOptions[1]["disabled"] && filterValue.filter(item2 => item2.title == "Feminino")) {
+        if (listOptions[1]["disabled"] && (listOptions[1]["label"] == "F" && filterValue.filter(item => item.title == "Feminino"))) {
             listOptions[1]["disabled"] = false
         }
+
+        if (!filterUfAction && filterValue.filter(item2 => item2.type == "estado")) {
+            setFilterUfAction(true)
+        } else if (filterUfAction) {
+            setFilterUfAction(false)
+        }
+
+        if (!filterPartidoAction && filterValue.filter(item2 => item2.type == "partido")) {
+            setFilterPartidoAction(true)
+        } else if (filterPartidoAction) {
+            setFilterPartidoAction(false)
+        }
+
 
         /*checar se o objeto se o objeto esta vazio*/
         if (filterValue.length > 0) {
             filterValue.map(item => {
-                item.type === "uf" ?
-                    (
+                switch (item.type) {
+                    case 'uf':
                         formattedSeach = formattedSeach + "&siglaUf=" + item.label
-                    )
-                    :
-                    (
+                        break;
+                    case 'partido':
+
+                        formattedSeach = formattedSeach + "&siglaUf=" + item.label
+                    case 'sex':
                         formattedSeach = formattedSeach + "&siglaSexo=" + item.label,
-                        item.disabled = true,
-                        (item.label === "M") ? listOptions[1]["disabled"] = true : listOptions[0]["disabled"] = true
-                    )
+                            item.disabled = true,
+                            (item.label === "M") ? listOptions[1]["disabled"] = true : listOptions[0]["disabled"] = true
+                        break;
+                    default:
+                        break;
+                }
 
 
                 /*primeiro filtro criado para desabilitar o sexo F, caso se o M ja estivesse habilitado */
@@ -109,25 +136,74 @@ const FilterBy = ({ onAddUser }) => {
 
 
     return (
-        <Stack spacing={3} sx={{ width: 500 }}>
-            <Autocomplete
-                multiple
-                id="tags-outlined"
-                options={listOptions}
-                getOptionLabel={(option) => option.title}
-                getOptionDisabled={(option) => !!option.disabled}
-                filterSelectedOptions
-                onChange={(event, filterValue) => {
-                    setFilterValue(filterValue);
-                }}
-                renderInput={(params) => (
-                    <TextField
-                        {...params}
-                        label="Filtrar por"
-                    />
-                )}
-            />
-        </Stack>
+        <div style={{ display: "flex" }}>
+            <Stack spacing={3} sx={{ width: 300, marginRight: 5 }}>
+                <Autocomplete
+                    multiple
+                    id="tags-outlined"
+                    options={listOptions}
+                    getOptionLabel={(option) => option.title}
+                    getOptionDisabled={(option) => !!option.disabled}
+                    filterSelectedOptions
+                    onChange={(event, filterValue) => {
+                        setFilterValue(filterValue);
+                    }}
+                    renderInput={(params) => (
+                        <TextField
+                            {...params}
+                            label="Filtrar por"
+                        />
+                    )}
+                />
+            </Stack>
+            {
+                filterUfAction ?
+                    <Stack spacing={3} sx={{ width: 300, marginRight: 5 }}>
+                        <Autocomplete
+                            multiple
+                            id="tags-outlined"
+                            options={StateOptions}
+                            getOptionLabel={(option) => option.title}
+                            getOptionDisabled={(option) => !!option.disabled}
+                            filterSelectedOptions
+                            onChange={(event, filterValue) => {
+                                setFilterValue(filterValue);
+                            }}
+                            renderInput={(params) => (
+                                <TextField
+                                    {...params}
+                                    label="Filtrar por UF"
+                                />
+                            )}
+                        />
+                    </Stack>
+                    : <></>
+            }
+            {
+                filterPartidoAction ?
+                    <Stack spacing={3} sx={{ width: 300, marginRight: 5 }}>
+                        <Autocomplete
+                            multiple
+                            id="tags-outlined"
+                            options={StateOptions}
+                            getOptionLabel={(option) => option.title}
+                            getOptionDisabled={(option) => !!option.disabled}
+                            filterSelectedOptions
+                            onChange={(event, filterValue) => {
+                                setFilterValue(filterValue);
+                            }}
+                            renderInput={(params) => (
+                                <TextField
+                                    {...params}
+                                    label="Filtrar por estado"
+                                />
+                            )}
+                        />
+                    </Stack>
+                    : <></>
+            }
+
+        </div>
     )
 }
 

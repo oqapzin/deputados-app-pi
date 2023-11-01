@@ -86,18 +86,18 @@ const CardPartidos = ({ arrayName = [], textCenter = "", isFavoritePage = false,
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small"><Link className="text-decoration-none" href={`/partidos/detalhes/${item.sigla}`}>Mais detalhes</Link></Button>
+                                <Button size="small"><Link className="text-decoration-none" href={`/partidos/detalhes/${item.id}`}>Mais detalhes</Link></Button>
                                 {favPartidos.indexOf(item.sigla) == -1 ?
                                     <OverlayTrigger
                                         placement="bottom"
-                                        overlay={<Tooltip id="button-tooltip-2">Favoritar seu deputado</Tooltip>}
+                                        overlay={<Tooltip id="button-tooltip-2">Favoritar seu partido</Tooltip>}
                                     >
                                         <div className="align-items-end ml-auto"><StarBorderIcon onClick={() => addFavorite(item.sigla)} /></div>
                                     </OverlayTrigger>
                                     :
                                     <OverlayTrigger
                                         placement="bottom"
-                                        overlay={<Tooltip id="button-tooltip-2">Desfavoritar seu deputado</Tooltip>}
+                                        overlay={<Tooltip id="button-tooltip-2">Desfavoritar seu partido</Tooltip>}
                                     >
                                         <div className="align-items-end ml-auto"><StarIcon value={1} sx={{ color: "var(--amarelo)" }} onClick={() => remFavorite(item.sigla)} /></div>
                                     </OverlayTrigger>

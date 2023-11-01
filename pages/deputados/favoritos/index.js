@@ -43,8 +43,8 @@ export default function Favorites() {
     }
 
 
-    const arrayNull = (teste) => {
-        if (teste) setDeputados([])
+    const arrayNull = (isArrayANull) => {
+        if (isArrayANull) setDeputados([])
     }
 
     return (

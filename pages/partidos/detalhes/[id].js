@@ -10,8 +10,9 @@ import Grid from "@mui/material/Grid";
 import Tag from '../../../components/Tags';
 import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from 'next/router';
+import { dateFormatter } from '../../../functions/formatter';
 
-const detalhesPartido = ({ partido, liderPartido, membrosPartidoMasc, membrosPartidoFem }) => {
+const detalhesPartido = ({ partido, liderPartidoDados, membrosPartidoMasc, membrosPartidoFem }) => {
   const [deputados, setDeputados] = useState([])
   const [deputadas, setDeputadas] = useState([])
   const [concatDeputaos, setConcatDeputaos] = useState([]) /*concatenar a busca de deputados femininos e masculinos*/
@@ -66,11 +67,8 @@ const detalhesPartido = ({ partido, liderPartido, membrosPartidoMasc, membrosPar
     }
   };
 
-
-
   useEffect(() => {
     const concat = membrosPartidoMasc.concat(membrosPartidoFem)
-
     setConcatDeputaos(concat)
   }, [membrosPartidoMasc, membrosPartidoFem]);
 
@@ -145,9 +143,7 @@ const detalhesPartido = ({ partido, liderPartido, membrosPartidoMasc, membrosPar
 
     return function cleanup() {
       myLineChart.destroy();
-
     }
-
   }, [deputados, deputadas])
 
 
@@ -163,30 +159,88 @@ const detalhesPartido = ({ partido, liderPartido, membrosPartidoMasc, membrosPar
         <CardContent sx={{ mb: 10, padding: 0, boxShadow: "0 4px 6px rgba(10,10,10,.1), 0 0 0 2px rgba(10,10,10,.1)" }}>
           <div style={{ boxShadow: "rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px", background: "linear-gradient( 109.6deg, rgba(255, 255, 255,1) 20.8%, var(--amarelo) 91.1% )", padding: 10 }}>
             <div className='text-center text-uppercase mb-5'>
-              <h1 style={{ fontSize: 60, fontWeight: 500, fontFamily: "spen Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;" }}> {liderPartido[0].nome}</h1>
+              <h3 style={{ fontSize: 30, fontWeight: 500, fontFamily: "spen Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;" }}>LIDER DO PARTIDO</h3>
+              <h1 style={{ fontSize: 60, fontWeight: 500, fontFamily: "spen Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;" }}> {liderPartidoDados["ultimoStatus"].nome}</h1>
             </div>
             <Grid container>
               <Grid md={2} sx={{ margin: "0 0 2% 3%" }}>
                 <CardMedia
                   component="img"
-                  image={liderPartido[0].urlFoto}
-                  title={liderPartido[0].nome}
+                  image={liderPartidoDados["ultimoStatus"].urlFoto}
+                  title={liderPartidoDados["ultimoStatus"].nome}
                   style={{ borderRadius: 10, boxShadow: "rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px", marginBottom: "30px" }}
                 />
 
                 <Tag
                   Islabel="Deputados:"
-                  value={deputados.length}
+                  value={membrosPartidoMasc.length}
                   warning
                   center
                 />
 
                 <Tag
                   Islabel="Deputadas:"
-                  value={deputadas.length}
+                  value={membrosPartidoFem.length}
                   warning
                   center
                 />
+              </Grid>
+              <Grid md={8} sx={{ ml: 4, color: "#858585", fontSize: "1.2rem", fontFamily: 'Montserrat', fontStyle: "normal", fontWeight: 500 }}>
+                <div style={{ display: "flex" }}>
+                  <Grid sx={{ ml: 4, mr: 16, display: "flex", flexDirection: "column" }}>
+                    <Tag
+                      Islabel="Nome Civil:"
+                      value={liderPartidoDados.nomeCivil}
+
+                      blue
+                    />
+
+                    <Tag
+                      Islabel="Partido:"
+                      value={`${liderPartidoDados.municipioNascimento} - ${liderPartidoDados.ufNascimento}`}
+                      blue
+                    />
+
+                    <Tag
+                      Islabel="Naturalidade:"
+                      value={`${liderPartidoDados.municipioNascimento} - ${liderPartidoDados.ufNascimento}`}
+                      blue
+                    />
+
+                    <Tag
+                      Islabel="Data de Nascimento:"
+                      value={dateFormatter(liderPartidoDados.dataNascimento)}
+                      blue
+                    />
+
+                    <Tag
+                      Islabel="Nível de escolaridade:"
+                      value={liderPartidoDados.escolaridade}
+                      blue
+                    />
+                  </Grid>
+
+                  <Grid sx={{ display: "flex", flexDirection: "column" }}>
+                    <Tag
+                      Islabel="Gabinete:"
+                      value={`Gabinete ${liderPartidoDados["ultimoStatus"]["gabinete"].nome} - Prédio ${liderPartidoDados["ultimoStatus"]["gabinete"].predio} - Sala ${liderPartidoDados["ultimoStatus"]["gabinete"].sala}`}
+                      blue
+                    />
+
+                    <Tag
+                      Islabel="Telefone:"
+                      value={liderPartidoDados["ultimoStatus"]["gabinete"].telefone}
+                      blue
+                    />
+
+                    <Tag
+                      Islabel="E-mail:"
+                      value={liderPartidoDados["ultimoStatus"]["gabinete"].email}
+                      blue
+                    />
+
+                  </Grid>
+                </div>
               </Grid>
             </Grid>
           </div>
@@ -195,12 +249,14 @@ const detalhesPartido = ({ partido, liderPartido, membrosPartidoMasc, membrosPar
         <div className="App">
           <canvas id="myChart pt-5" ref={canvasEl} height="100" />
         </div>
+
         <Card sx={{ marginTop: 6, paddingBottom: 8, borderLeft: "3px solid var(--amarelo)", background: "#F2F2F2" }}>
           <CardDeputado
             arrayName={concatDeputaos}
             textCenter={`Deputados do partido ${partido["sigla"]}`}
             activeFilter={false}
             pageSize={5}
+            resetPageToTop={false}
           />
         </Card>
 
@@ -224,11 +280,13 @@ const detalhesPartido = ({ partido, liderPartido, membrosPartidoMasc, membrosPar
 export default detalhesPartido
 export async function getServerSideProps(context) {
   const partidoId = context.params.id
-
   const resultPartido = await apiDeputados.get(`/partidos/${partidoId}`)
   const partido = resultPartido.data.dados
+
   const resultLider = await apiDeputados.get(`/partidos/${partidoId}/lideres`)
   const liderPartido = resultLider.data.dados
+  const resultLiderDados = await apiDeputados.get(`/deputados/${liderPartido[0].id}`)
+  const liderPartidoDados = resultLiderDados.data.dados
 
   const resultMembrosMasc = await apiDeputados.get(`/deputados?siglaSexo=M&siglaPartido=${partido["sigla"]}&ordenarPor=nome&ordem=asc`)
   const membrosPartidoMasc = resultMembrosMasc.data.dados
@@ -236,6 +294,6 @@ export async function getServerSideProps(context) {
   const membrosPartidoFem = resultMembrosFem.data.dados
 
   return {
-    props: { partido, liderPartido, membrosPartidoMasc, membrosPartidoFem },
+    props: { partido, liderPartidoDados, membrosPartidoMasc, membrosPartidoFem },
   }
 }
